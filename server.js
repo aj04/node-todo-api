@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const {ObjectID} = require('mongodb');
 
+const port = process.env.PORT || 3000;
+
 let {mongoose} = require('./db/mongoose');
 let {User} = require('./models/user');
 let {Todo} = require('./models/todo');
@@ -47,8 +49,8 @@ app.get('/todos/:id', (req, res) => {
 });
 
 
-app.listen(3000, ()=> {
-    console.log(`The server is runing on 3000`);
+app.listen(port, ()=> {
+    console.log(`The server is runing on ${port}`);
 });
 
 
