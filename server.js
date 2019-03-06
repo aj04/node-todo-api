@@ -13,6 +13,12 @@ let app = express();
 //body is stored by body parser, so this middleware converts all the body contents to json object Body
 app.use(bodyParser.json());
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 app.post('/todos', (request, response)=> {
   let todo = new Todo({
       text : request.body.text
