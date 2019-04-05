@@ -50,7 +50,11 @@ app.get('/todos/:id', (req, res) => {
   }, (e)=> {
       res.status(400).send(err);
   });
+});
 
+//  Delete todo
+app.delete('/todos/:id*?', function (req, res) {
+  res.send('Got a DELETE request at /todos/')
 
 });
 
