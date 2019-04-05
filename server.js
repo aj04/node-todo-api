@@ -31,7 +31,7 @@ app.post('/todos', (request, response)=> {
 });
 
 app.get('/todos', (req, res) => {
-   Todo.find().then((docs)=>{
+   Todo.find().sort({completedDateTime: 'asc'}).then((docs)=>{
        res.send({docs});
    }, (err)=> {
        res.status(400).send(err);
@@ -48,14 +48,19 @@ app.get('/todos/:id', (req, res) => {
   Todo.findById(id).then((doc)=> {
       res.send({doc});
   }, (e)=> {
-      res.status(400).send(err);
+      res.status(400).send(e);
   });
 });
 
 //  Delete todo
 app.delete('/todos/:id*?', function (req, res) {
+  Todo.deleteMany({})
+    .then(() => {
+      res.send('Deleted All Documents')
+    }, (e) => {
+      res.status(400).send(e);
+    });
   res.send('Got a DELETE request at /todos/')
-
 });
 
 
